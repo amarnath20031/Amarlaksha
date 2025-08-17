@@ -1,0 +1,33 @@
+/* MOBILE SCROLLING FIX - Override Tailwind constraints */
+
+/* Remove all height constraints that block mobile scrolling */
+@media screen and (max-width: 768px) {
+  /* Force scrollable document */
+  html, body {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+  }
+
+  /* Remove Tailwind height constraints */
+  .min-h-screen, .h-screen, .h-full {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Fix specific containers */
+  .page-container, .mobile-content, .analytics-content, .profile-content {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure cards don't constrain */
+  .bg-white, .max-w-md, .mx-auto {
+    height: auto !important;
+    min-height: auto !important;
+  }
+}
