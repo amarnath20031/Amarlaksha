@@ -1,0 +1,551 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 9%);
+  --muted: hsl(210, 40%, 98%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 9%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(158, 64%, 52%);
+  --secondary-foreground: hsl(0, 0%, 9%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(0, 0%, 9%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(60, 9%, 98%);
+  --ring: hsl(221, 83%, 53%);
+  --radius: 1rem;
+  
+  /* Custom colors for categories */
+  --color-red: hsl(0, 84%, 60%);
+  --color-blue: hsl(221, 83%, 53%);
+  --color-green: hsl(158, 64%, 52%);
+  --color-purple: hsl(271, 81%, 56%);
+  --color-pink: hsl(330, 81%, 60%);
+  --color-orange: hsl(25, 95%, 53%);
+  --color-yellow: hsl(48, 96%, 53%);
+  --color-indigo: hsl(231, 48%, 48%);
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    /* Ensure proper mobile scrolling and viewport handling */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* Enable GPU acceleration for smoother scrolling */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    /* Fix mobile scrolling issues */
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Improve scrolling performance */
+    will-change: scroll-position;
+  }
+
+  /* COMPLETE CSS RESET FOR MOBILE SCROLLING */
+  
+  /* Remove all constraints that could block scrolling */
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Document level scrolling */
+  html {
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    touch-action: pan-y;
+  }
+
+  /* Root must not constrain */
+  #root {
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Simple page structure */
+  .page-container {
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Content areas */
+  .mobile-content, .analytics-content, .profile-content {
+    padding-bottom: 120px;
+    position: relative;
+  }
+
+  /* Mobile-specific overrides */
+  @media screen and (max-width: 768px) {
+    body {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
+    }
+  }
+
+  /* Enhanced scrolling for all devices */
+  * {
+    /* Enable smooth scrolling on all elements */
+    scroll-behavior: smooth;
+    /* Improve performance */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* === DEVICE-SPECIFIC OPTIMIZATIONS === */
+  
+  /* Mobile Phones (320px - 480px) */
+  @media (max-width: 480px) and (max-height: 896px) {
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      position: relative;
+      overflow-y: auto;
+      /* Optimize for touch scrolling */
+      touch-action: pan-y;
+    }
+    
+    /* Fix content padding for mobile */
+    .mobile-content {
+      padding-bottom: 100px !important;
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Tablets (481px - 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    html, body {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .mobile-content {
+      padding-bottom: 80px !important;
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Desktop/Laptop (769px+) */
+  @media (min-width: 769px) {
+    html, body {
+      scroll-behavior: smooth;
+    }
+    
+    .mobile-content {
+      padding-bottom: 60px !important;
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    
+    .mobile-content {
+      -webkit-overflow-scrolling: touch;
+      transform: translate3d(0, 0, 0); /* Enable GPU acceleration */
+    }
+  }
+
+  /* Android Chrome specific fixes */
+  @media screen and (-webkit-min-device-pixel-ratio: 1) {
+    html, body {
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.8s ease-out;
+  }
+  
+  .category-red { @apply bg-red-100 text-red-600; }
+  .category-blue { @apply bg-blue-100 text-blue-600; }
+
+  /* Progress bar styles */
+  .progress-container {
+    width: 100%;
+    height: 24px;
+    background-color: #f3f4f6;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    position: relative;
+  }
+
+  .daily-progress-container {
+    width: 100%;
+    height: 24px;
+    background-color: #f3f4f6;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .progress-fill, .daily-progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out, background-color 0.3s ease;
+    position: relative;
+  }
+
+  /* Color classes with !important to override inline styles */
+  .fill-green, .daily-progress-green {
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3) !important;
+  }
+
+  .fill-orange, .daily-progress-orange {
+    background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%) !important;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3) !important;
+  }
+
+  .fill-red, .daily-progress-red {
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%) !important;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3) !important;
+  }
+
+  /* Pulse animation for over-budget */
+  .pulse-effect, .daily-progress-pulse {
+    animation: budgetPulse 1.5s infinite;
+  }
+
+  @keyframes budgetPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.02); }
+  }
+  .category-green { @apply bg-green-100 text-green-600; }
+  .category-purple { @apply bg-purple-100 text-purple-600; }
+  .category-pink { @apply bg-pink-100 text-pink-600; }
+  .category-orange { @apply bg-orange-100 text-orange-600; }
+  .category-yellow { @apply bg-yellow-100 text-yellow-600; }
+  .category-indigo { @apply bg-indigo-100 text-indigo-600; }
+  
+  .rupee-symbol::before {
+    content: "₹";
+  }
+}
+
+/* Mobile-first animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+@keyframes pulse-gentle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 2s infinite;
+}
+
+/* Mobile app container */
+.mobile-app {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: white;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar for mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom animations for emoji feedback */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+    opacity: 0.3;
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+    opacity: 0.6;
+  }
+}
+
+/* Enhanced pulse for over-budget state */
+@keyframes pulse-red {
+  0%, 100% { 
+    background-color: #FF4D4F;
+    opacity: 1;
+  }
+  50% { 
+    background-color: #DC2626;
+    opacity: 0.9;
+  }
+}
+
+/* Guaranteed pulse animation for progress bar */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0.7;
+  }
+}
+
+/* Progress bar container and fill styles */
+.progress-container {
+  width: 100%;
+  height: 16px;
+  background-color: #e5e7eb;
+  border-radius: 8px;
+  border: 2px solid #d1d5db;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease-out;
+  position: relative;
+}
+
+.fill-green {
+  background-color: #10b981 !important;
+}
+
+.fill-orange {
+  background-color: #f59e0b !important;
+}
+
+.fill-red {
+  background-color: #ef4444 !important;
+}
+
+.pulse-effect {
+  animation: pulse 1.5s infinite;
+}
+
+/* Universal auth layout - works on all devices */
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh; /* For mobile browsers */
+  padding: 24px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.auth-card {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Desktop and tablet - maintain center */
+@media (min-width: 769px) and (min-height: 700px) {
+  .auth-wrapper {
+    align-items: center;
+    padding: 24px;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .auth-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Very small screens - ensure scrollability */
+@media (max-height: 650px) {
+  .auth-wrapper {
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+}
+
+/* Compact spacing for small screens */
+@media (max-height: 600px) {
+  .auth-wrapper .text-center {
+    margin-bottom: 1rem;
+  }
+  
+  .auth-wrapper .mb-6 {
+    margin-bottom: 1rem;
+  }
+  
+  .auth-wrapper .mb-8 {
+    margin-bottom: 1rem;
+  }
+  
+  .auth-wrapper .space-y-4 > * + * {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Analytics page specific mobile scroll fix */
+.analytics-page {
+  height: 100vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-red {
+  animation: pulse-red 1.5s ease-in-out infinite;
+}
+
+/* Responsive Layout Enhancements */
+@media (min-width: 1024px) {
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .mobile-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  
+  .main-column {
+    grid-column: 1;
+  }
+  
+  .sidebar-column {
+    grid-column: 2;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
+  
+  /* Navigation stays full-width at bottom */
+  .navigation-wrapper {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobile-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
