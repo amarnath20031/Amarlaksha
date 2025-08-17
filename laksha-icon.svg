@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Premium Background Gradient -->
+    <radialGradient id="bgGradient" cx="0.5" cy="0.3" r="0.9">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#5b73e8;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3730a3;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Enhanced Shadow -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-opacity="0.4" flood-color="#1e1b4b"/>
+    </filter>
+    
+    <!-- Text Shadow -->
+    <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-opacity="0.5" flood-color="#1e1b4b"/>
+    </filter>
+    
+    <!-- Rupee Symbol Glow -->
+    <filter id="rupeeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-opacity="0.6" flood-color="#fbbf24"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="16" flood-opacity="0.3" flood-color="#1e1b4b"/>
+    </filter>
+  </defs>
+  
+  <!-- Background Circle with Premium Gradient -->
+  <circle cx="512" cy="512" r="490" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Subtle Inner Ring -->
+  <circle cx="512" cy="512" r="460" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Enhanced Currency Symbol ₹ -->
+  <g transform="translate(512, 360)" filter="url(#rupeeGlow)">
+    <!-- Top horizontal line -->
+    <line x1="-90" y1="-70" x2="50" y2="-70" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+    <!-- Second horizontal line -->
+    <line x1="-90" y1="-30" x2="30" y2="-30" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+    <!-- Vertical line -->
+    <line x1="-60" y1="-70" x2="-60" y2="30" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+    <!-- Diagonal line -->
+    <line x1="-60" y1="30" x2="50" y2="100" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+  </g>
+  
+  <!-- "Laksha" Text with Better Typography -->
+  <text x="512" y="580" 
+        font-family="'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-size="84" 
+        font-weight="800" 
+        text-anchor="middle" 
+        fill="#ffffff" 
+        letter-spacing="-0.02em"
+        filter="url(#textShadow)">
+    Laksha
+  </text>
+  
+  <!-- "Coach" Subtitle -->
+  <text x="512" y="650" 
+        font-family="'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-size="38" 
+        font-weight="500" 
+        text-anchor="middle" 
+        fill="rgba(255,255,255,0.85)" 
+        letter-spacing="0.05em"
+        filter="url(#textShadow)">
+    COACH
+  </text>
+  
+  <!-- Premium Accent Elements -->
+  <circle cx="180" cy="180" r="3" fill="rgba(255,255,255,0.15)" opacity="0.8"/>
+  <circle cx="844" cy="200" r="2.5" fill="rgba(255,255,255,0.12)" opacity="0.7"/>
+  <circle cx="120" cy="750" r="2" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+  <circle cx="880" cy="800" r="3.5" fill="rgba(255,255,255,0.18)" opacity="0.8"/>
+  
+  <!-- Subtle highlight at top -->
+  <ellipse cx="512" cy="200" rx="200" ry="80" fill="rgba(255,255,255,0.03)" opacity="0.8"/>
+</svg>

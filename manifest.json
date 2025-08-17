@@ -1,0 +1,65 @@
+{
+  "name": "Laksha Coach - Budget Tracker",
+  "short_name": "Laksha Coach",
+  "description": "Smart budget tracking app for Indian users with real-time expense monitoring and financial coaching",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3730a3",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "lifestyle"],
+  "lang": "en-IN",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/laksha-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Expense",
+      "short_name": "Add Expense",
+      "description": "Quickly add a new expense",
+      "url": "/expense-form",
+      "icons": [
+        {
+          "src": "/laksha-icon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Budget",
+      "short_name": "Budget",
+      "description": "Check your budget status",
+      "url": "/budget",
+      "icons": [
+        {
+          "src": "/laksha-icon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    }
+  ]
+}
