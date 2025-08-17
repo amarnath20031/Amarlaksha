@@ -1,42 +1,27 @@
-import express from "express";
-import { log, setupVite, serveStatic } from "../shared/server/vite";
-import { registerRoutes } from "../shared/server/routes";
+import express, { Request, Response } from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
+const PORT = 5000; // Change if needed
 
-// Set up middleware
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
 
-// Bind to 0.0.0.0 for accessibility instead of localhost
-const HOST = "0.0.0.0";
-const PORT = parseInt(process.env.PORT || "5000", 10);
+// Simple login route
+app.post("/api/auth/login", (req: Request, res: Response) => {
+  const { email } = req.body;
 
-async function startServer() {
-  try {
-    // Register all API routes
-    const server = await registerRoutes(app);
-
-    if (process.env.NODE_ENV === "production") {
-      serveStatic(app);
-    } else {
-      await setupVite(app, server);
-    }
-
-    server.listen(PORT, HOST, () => {
-      log(`🚀 Server running on http://${HOST}:${PORT}`);
-      
-      if (process.env.NODE_ENV === "production") {
-        log("📦 Serving static files from dist/public");
-      } else {
-        log("🔥 Development mode with Vite HMR");
-      }
-    });
-
-  } catch (error) {
-    console.error("❌ Failed to start server:", error);
-    process.exit(1);
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ message: "Invalid email address" });
   }
-}
 
-startServer();
+  console.log("✅ Login request received for:", email);
+  return res.json({ message: "Login successful!" });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
